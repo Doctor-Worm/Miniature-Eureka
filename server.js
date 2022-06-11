@@ -2,7 +2,6 @@ const express = require('express');
 
 const PORT = 3001;
 const app = express();
-const routes = require('./routes');
 
 // parse incoming string or array data
 app.use(express.urlencoded({extended: true}));
@@ -10,7 +9,11 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.use(routes);
+const apiRoutes = require('./routes/api');
+const htmlRoutes = require('./routes/html');
+
+app.use('/', htmlRoutes);
+app.use('/api', apiRoutes);
 
 
 app.listen(PORT, () => {

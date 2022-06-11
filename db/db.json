@@ -1,6 +1,14 @@
-[
+{
+  "notes": [
     {
-        "title":"Test Title",
-        "text":"Test text"
+      "title": "Health",
+      "text": "drink more water",
+      "id": "fb69a8e6-91ac-406e-a591-5dfbacb79272"
+    },
+    {
+      "title": "House",
+      "text": "clean it",
+      "id": "00868bdc-4983-4db4-a14d-799ae8ff43dd"
     }
-]
+  ]
+}
