@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { notes } = require('../../db/db.json');
+let { notes } = require('../../db/db.json');
 const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -21,7 +21,7 @@ router.get('/notes/:id', (req, res) => {
 
 router.post('/notes', (req, res) => {
     let body = req.body;
-    console.log(body);
+    // console.log(body);
     // if any data in req.body is incorrect, send 400 error back
     if (!body) {
         res.status(400).send('There is no note to save!');
@@ -44,15 +44,17 @@ router.post('/notes', (req, res) => {
 
 router.delete('/notes/:id', (req, res) => {
     const id = req.params.id;
+    console.log(id);
     if (!id) {
         res.send(500).json(console.error());
     } else {
         const updatedNotes = notes.filter(note => note.id !== id);
-        fs.writeFileSync(
-            path.join(__dirname, '../../db/db.json'),
-            JSON.stringify({ notes: updatedNotes }, null, 2)
-        );
-        res.redirect(req.get('referer'));
+        notes = updatedNotes;
+        // fs.writeFileSync(
+        //     path.join(__dirname, '../../db/db.json'),
+        //     JSON.stringify({ notes: updatedNotes }, null, 2)
+        // );
+        res.redirect('/notes');
     }
 });
 
